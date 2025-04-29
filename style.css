@@ -1,0 +1,387 @@
+@import url("https://fonts.googleapis.com/css2?family=Tagesschrift&display=swap");
+
+/* BACKGROUND ANIMATION */
+body {
+   margin: 0;
+   height: 100vh;
+   background: black;
+}
+.button {
+   position: fixed;
+   bottom: 20px;
+   left: 50%;
+   transform: translateX(-50%);
+   z-index: 100;
+   opacity: 1;
+   transition: opacity 1s ease;
+}
+.btn {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding-left: 30px;
+   padding-right: 30px;
+   padding-top: 20px;
+   padding-bottom: 20px;
+   border-radius: 20px;
+   border: 0;
+   font-family: "Tagesschrift", system-ui;
+   font-size: 20px;
+   background: #e20026;
+   color: white;
+   transition: all 0.3s ease;
+}
+.btn:hover {
+   background: #ad011d;
+}
+.btn:active {
+   background: #c40222;
+}
+
+.initial-change {
+   animation: initialChange 2s forwards;
+}
+@keyframes initialChange {
+   from {
+      background: black;
+   }
+   to {
+      background: #b3e9f7;
+   }
+}
+
+@keyframes colorfulLoop {
+   0% {
+      background: #b3e9f7; /* lighter blue */
+   }
+   16% {
+      background: #b9f7ce; /* lighter green */
+   }
+   33% {
+      background: #f7d9b3; /* lighter orange */
+   }
+   50% {
+      background: #f7b3d9; /* lighter pink */
+   }
+   66% {
+      background: #f7b3b3; /* lighter red */
+   }
+   83% {
+      background: #f7e4b3; /* lighter yellow */
+   }
+   100% {
+      background: #b3e9f7;
+   }
+}
+.loop-animation {
+   animation: colorfulLoop 10s infinite;
+}
+
+/* BULBS */
+.bulbs {
+   display: flex;
+   justify-content: center;
+   gap: 80px;
+   z-index: 50;
+}
+.bulbs img {
+   width: 100px;
+}
+.hidden {
+   display: none;
+   pointer-events: none;
+}
+/* BULBS */
+
+/* BANNER */
+.banner {
+   position: absolute;
+   top: 0;
+   left: 50%;
+   transform: translateX(-50%) translateY(-200px);
+}
+.banner img {
+   animation: shake 4s ease-in-out infinite;
+}
+@keyframes shake {
+   0% {
+      transform: rotate(0deg);
+   }
+   25% {
+      transform: rotate(10deg);
+   }
+   50% {
+      transform: rotate(0deg);
+   }
+   75% {
+      transform: rotate(-10deg);
+   }
+   100% {
+      transform: rotate(0deg);
+   }
+}
+
+@keyframes moveDown {
+   0% {
+      transform: translateX(-50%) translateY(-200px);
+   }
+   100% {
+      transform: translateX(-50%) translateY(130px);
+   }
+}
+.move-down {
+   animation: moveDown 3s forwards ease-out;
+}
+
+/* BANNER */
+
+/* LET GO BALLOONS */
+.let-go-balloons {
+   position: absolute;
+   bottom: -400px;
+   left: 50%;
+   transform: translateX(-50%) translateY(0);
+}
+
+@keyframes flyUp {
+   0% {
+      transform: translateX(-50%) translateY(0);
+   }
+   100% {
+      transform: translateX(-50%) translateY(-1200px);
+   }
+}
+.fly-away {
+   animation: flyUp 10s forwards ease;
+}
+/* LET GO BALLOONS */
+
+/* NAME BALLOONS
+.name-balloons {
+   margin-top: 50px;
+}
+
+.name-balloon {
+   position: relative;
+   background-repeat: no-repeat;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   
+   font-size: 1.7rem;
+   font-weight: bold;
+   color: white;
+   overflow: hidden;
+}
+.name-balloon img {
+   position: relative;
+   width: 80px;
+}
+.name-balloon h2 {
+   position: absolute;
+   top: 15%;
+   left: 50%;
+   transform: translateX(-50%);
+   margin: 0;
+} */
+
+/* NAME BALLOONS */
+
+/* CAKE */
+.cake-container {
+   opacity: 0;
+   transition: opacity 3s ease;
+}
+.cake-container.visible {
+   opacity: 1;
+}
+.visible {
+   display: block;
+}
+:root {
+   --vanilla: #f0e4d0;
+   --chocolate: #553c13;
+}
+
+body {
+   background-color: #333;
+}
+
+.cake {
+   position: absolute;
+   width: 250px;
+   height: 200px;
+   top: 50%;
+   left: 50%;
+   margin-top: -70px;
+   margin-left: -125px;
+}
+
+.plate {
+   width: 270px;
+   height: 110px;
+   position: absolute;
+   bottom: -10px;
+   left: -10px;
+   background-color: #ccc;
+   border-radius: 50%;
+   box-shadow: 0 2px 0 #b3b3b3, 0 4px 0 #b3b3b3, 0 5px 40px rgba(0, 0, 0, 0.5);
+}
+
+.cake > * {
+   position: absolute;
+}
+
+.layer {
+   position: absolute;
+   display: block;
+   width: 250px;
+   height: 100px;
+   border-radius: 50%;
+   background-color: var(--chocolate);
+   box-shadow: 0 2px 0px #65461e, 0 4px 0px #4d3718, 0 6px 0px #4d3718,
+      0 8px 0px #4c3617, 0 10px 0px #4c3617, 0 12px 0px #4b3517,
+      0 14px 0px #4b3517, 0 16px 0px #4a3416, 0 18px 0px #4a3416,
+      0 20px 0px #493316, 0 22px 0px #493316, 0 24px 0px #483215,
+      0 26px 0px #483215, 0 28px 0px #473114, 0 30px 0px #473114;
+}
+
+.layer-top {
+   top: 0px;
+}
+.layer-middle {
+   top: 33px;
+}
+.layer-bottom {
+   top: 66px;
+}
+
+.icing {
+   top: 2px;
+   left: 5px;
+   background-color: var(--vanilla);
+   width: 240px;
+   height: 90px;
+   border-radius: 50%;
+   position: relative;
+}
+.icing::before {
+   content: "";
+   position: absolute;
+   top: 4px;
+   right: 5px;
+   bottom: 6px;
+   left: 5px;
+   background-color: #f2e7d4;
+   box-shadow: 0 0 4px #f3e8d6, 0 0 4px #f3e8d6, 0 0 4px #f3e8d6;
+   border-radius: 50%;
+   z-index: 1;
+}
+
+.drip {
+   display: block;
+   width: 50px;
+   height: 60px;
+   border-bottom-left-radius: 25px;
+   border-bottom-right-radius: 25px;
+   background-color: var(--vanilla);
+}
+
+.drip1 {
+   top: 53px;
+   left: 5px;
+   transform: skewY(15deg);
+   height: 48px;
+   width: 40px;
+}
+
+.drip2 {
+   top: 69px;
+   left: 181px;
+   transform: skewY(-15deg);
+}
+
+.drip3 {
+   top: 54px;
+   left: 90px;
+   width: 80px;
+   border-bottom-left-radius: 40px;
+   border-bottom-right-radius: 40px;
+}
+
+.candle {
+   background-color: #7b020b;
+   width: 16px;
+   height: 50px;
+   border-radius: 8px / 4px;
+   top: -20px;
+   left: 50%;
+   margin-left: -8px;
+   z-index: 10;
+   position: absolute;
+}
+.candle::before {
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 16px;
+   height: 8px;
+   border-radius: 50%;
+   background-color: #8c0d15;
+}
+
+.flame {
+   position: absolute;
+   background-color: orange;
+   width: 15px;
+   height: 35px;
+   border-radius: 10px 10px 10px 10px / 25px 25px 10px 10px;
+   top: -34px;
+   left: 50%;
+   margin-left: -7.5px;
+   z-index: 10;
+   box-shadow: 0 0 10px rgba(255, 165, 0, 0.5), 0 0 20px rgba(255, 165, 0, 0.5),
+      0 0 60px rgba(255, 165, 0, 0.5), 0 0 80px rgba(255, 165, 0, 0.5);
+   transform-origin: 50% 90%;
+   animation: flicker 1s ease-in-out alternate infinite;
+}
+
+@keyframes flicker {
+   0% {
+      transform: skewX(5deg);
+   }
+   25% {
+      transform: skewX(-5deg);
+   }
+   50% {
+      transform: skewX(10deg);
+   }
+   75% {
+      transform: skewX(-10deg);
+   }
+   100% {
+      transform: skewX(5deg);
+   }
+}
+
+/* CAKE */
+
+/* BLOW OUT */
+@keyframes blowOut {
+   0% {
+      opacity: 1;
+      transform: scale(1) skewX(5deg);
+   }
+   100% {
+      opacity: 0;
+      transform: scale(0.5) skewX(0deg);
+   }
+}
+
+.flame.blow-out {
+   animation: blowOut 1s ease forwards;
+   box-shadow: none;
+}
+
+/* BLOW OUT */
