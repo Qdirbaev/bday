@@ -87,6 +87,53 @@ switchButton.addEventListener("click", () => {
          cakeBtn.addEventListener("click", () => {
             cakeContainer.classList.add("visible");
             cakeBtn.style.display = "none";
+            const flame = document.querySelector(".flame");
+            let audioContext, analyser, mic, dataArray;
+
+            async function startMicDetection() {
+               try {
+                  // Get mic access
+                  const stream = await navigator.mediaDevices.getUserMedia({
+                     audio: true,
+                  });
+                  audioContext = new (window.AudioContext ||
+                     window.webkitAudioContext)();
+                  analyser = audioContext.createAnalyser();
+                  mic = audioContext.createMediaStreamSource(stream);
+                  mic.connect(analyser);
+                  analyser.fftSize = 512;
+
+                  const bufferLength = analyser.frequencyBinCount;
+                  dataArray = new Uint8Array(bufferLength);
+
+                  detectVolume();
+               } catch (err) {
+                  console.error("Microphone access denied or error:", err);
+               }
+            }
+
+            function detectVolume() {
+               requestAnimationFrame(detectVolume);
+               analyser.getByteTimeDomainData(dataArray);
+
+               let sum = 0;
+               for (let i = 0; i < dataArray.length; i++) {
+                  const deviation = dataArray[i] - 128;
+                  sum += deviation * deviation;
+               }
+
+               const volume = Math.sqrt(sum / dataArray.length);
+
+               // Trigger when volume exceeds threshold (tune this value)
+               if (volume > 15) {
+                  if (!flame.classList.contains("blow-out")) {
+                     flame.classList.add("blow-out");
+                  }
+               }
+            }
+
+            // Start mic detection on load or button press
+            startMicDetection();
          });
       }, 1000);
    }
