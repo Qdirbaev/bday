@@ -4,6 +4,7 @@
       <meta charset="UTF-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
       <title>For Uliana</title>
       <link rel="stylesheet" href="style.css" />
    </head>
@@ -79,7 +80,13 @@
       </div>
 
       <div class="close-eyes text-cont">
-         <p>Close your eyes and make a wish! (7sec)</p>
+         <p>Close your eyes and make a wish! (10sec)</p>
+      </div>
+
+      <div class="congrats text-cont" style="text-align: center;">
+         <p>
+            Happy 20th Birthday! Get ready for a year of fun, laughter, and making unforgettable memories!
+         </p>
       </div>
 
       <div class="blowing">
@@ -95,9 +102,11 @@
          <button class="btn cake-btn hidden">
             The Most Delicious Cake Ever
          </button>
+         <button class="btn again hidden">Try Again?</button>
       </div>
 
       <audio id="background-music" src="music.mp3"></audio>
+      <audio id="confetti" src="confetti.mp3"></audio>
       <script src="js.js"></script>
    </body>
 </html>
