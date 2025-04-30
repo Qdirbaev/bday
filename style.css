@@ -396,6 +396,34 @@ body {
 
 /* CAKE */
 
+/* TEXT COMING OUT */
+.text-cont {
+   position: fixed;
+   top: 70%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 5px;
+
+   opacity: 0;
+   transition: opacity 1s ease, transform 1s ease;
+}
+.text-cont p {
+   font-size: 30px;
+   font-family: "Tagesschrift", system-ui;
+}
+.text-cont img {
+   width: 100px;
+   height: 50px;
+}
+.text-cont.show {
+   opacity: 1;
+   transform: translate(-50%, -50%) scale(1.05);
+}
+/* TEXT COMING OUT */
+
 /* BLOW OUT */
 @keyframes blowOut {
    0% {
@@ -425,11 +453,10 @@ body {
 
    opacity: 0;
    transition: opacity 0.5s ease, transform 0.5s ease;
-
 }
-.blowing.show{
+.blowing.show {
    opacity: 1;
-   transform:translate(-50%, -50%) scale(1.05);
+   transform: translate(-50%, -50%) scale(1.05);
 }
 
 .blowing p {

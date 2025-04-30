@@ -20,8 +20,32 @@ const cakeContainer = document.querySelector(".cake-container");
 const cake = document.querySelector(".cake");
 const cakeBtn = document.querySelector(".cake-btn");
 
+// stage close eyes
+const closeCont = document.querySelector(".close-eyes");
+
 // stage 7 blowing
 const blowingCont = document.querySelector(".blowing");
+
+// asking access to microphone
+let micAccessGranted = false;
+
+async function requestMicrophoneAccess() {
+   try {
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+      micAccessGranted = true;
+      console.log("Microphone access granted.");
+   } catch (err) {
+      micAccessGranted = false;
+      console.error("Microphone access denied:", err);
+   }
+}
+
+// Ask for mic access as soon as the page is ready
+document.addEventListener("DOMContentLoaded", () => {
+   requestMicrophoneAccess();
+});
+
+
 
 switchButton.addEventListener("click", () => {
    document.body.classList.remove("loop-animation"); // just in case
@@ -80,7 +104,7 @@ switchButton.addEventListener("click", () => {
             letGoBtn.style.display = "none";
             setTimeout(() => {
                stage_5();
-            }, 5000);
+            }, 2000);
          });
       }, 1000);
    }
@@ -90,57 +114,69 @@ switchButton.addEventListener("click", () => {
          cakeBtn.addEventListener("click", () => {
             cakeContainer.classList.add("visible");
             cakeBtn.style.display = "none";
-            const flame = document.querySelector(".flame");
-            let audioContext, analyser, mic, dataArray;
-
-            async function startMicDetection() {
-               try {
-                  // Get mic access
-                  const stream = await navigator.mediaDevices.getUserMedia({
-                     audio: true,
-                  });
-                  audioContext = new (window.AudioContext ||
-                     window.webkitAudioContext)();
-                  analyser = audioContext.createAnalyser();
-                  mic = audioContext.createMediaStreamSource(stream);
-                  mic.connect(analyser);
-                  analyser.fftSize = 512;
-
-                  const bufferLength = analyser.frequencyBinCount;
-                  dataArray = new Uint8Array(bufferLength);
-
-                  detectVolume();
-               } catch (err) {
-                  console.error("Microphone access denied or error:", err);
-               }
-            }
-
-            function detectVolume() {
-               requestAnimationFrame(detectVolume);
-               analyser.getByteTimeDomainData(dataArray);
-
-               let sum = 0;
-               for (let i = 0; i < dataArray.length; i++) {
-                  const deviation = dataArray[i] - 128;
-                  sum += deviation * deviation;
-               }
-
-               const volume = Math.sqrt(sum / dataArray.length);
-
-               // Trigger when volume exceeds threshold (tune this value)
-               if (volume > 15) {
-                  if (!flame.classList.contains("blow-out")) {
-                     flame.classList.add("blow-out");
-                  }
-               }
-            }
             setTimeout(() => {
-               blowingCont.classList.add("show");
-            }, 2000);
-            // Start mic detection on load or button press
-            startMicDetection();
+               closeCont.classList.add("show");
+               setTimeout(() => {
+                  closeCont.classList.remove("show");
+
+                  //blow text appears
+                  setTimeout(() => {
+                     blowingCont.classList.add("show");
+                  }, 1000);
+
+                  stage_blowing();
+               }, 7000);
+            }, 1000);
          });
       }, 1000);
+   }
+   function stage_blowing() {
+      const flame = document.querySelector(".flame");
+      let audioContext, analyser, mic, dataArray;
+
+      async function startMicDetection() {
+         try {
+            // Get mic access
+            const stream = await navigator.mediaDevices.getUserMedia({
+               audio: true,
+            });
+            audioContext = new (window.AudioContext ||
+               window.webkitAudioContext)();
+            analyser = audioContext.createAnalyser();
+            mic = audioContext.createMediaStreamSource(stream);
+            mic.connect(analyser);
+            analyser.fftSize = 512;
+
+            const bufferLength = analyser.frequencyBinCount;
+            dataArray = new Uint8Array(bufferLength);
+
+            detectVolume();
+         } catch (err) {
+            console.error("Microphone access denied or error:", err);
+         }
+      }
+
+      function detectVolume() {
+         requestAnimationFrame(detectVolume);
+         analyser.getByteTimeDomainData(dataArray);
+
+         let sum = 0;
+         for (let i = 0; i < dataArray.length; i++) {
+            const deviation = dataArray[i] - 128;
+            sum += deviation * deviation;
+         }
+
+         const volume = Math.sqrt(sum / dataArray.length);
+
+         // Trigger when volume exceeds threshold (tune this value)
+         if (volume > 15) {
+            if (!flame.classList.contains("blow-out")) {
+               flame.classList.add("blow-out");
+            }
+         }
+         // Start mic detection on load or button press
+      }
+      startMicDetection();
    }
    bulbs.classList.remove("hidden");
    switchButton.style.display = "none";
