@@ -20,6 +20,9 @@ const cakeContainer = document.querySelector(".cake-container");
 const cake = document.querySelector(".cake");
 const cakeBtn = document.querySelector(".cake-btn");
 
+// stage 7 blowing
+const blowingCont = document.querySelector(".blowing");
+
 switchButton.addEventListener("click", () => {
    document.body.classList.remove("loop-animation"); // just in case
 
@@ -131,7 +134,9 @@ switchButton.addEventListener("click", () => {
                   }
                }
             }
-
+            setTimeout(() => {
+               blowingCont.classList.add("show");
+            }, 2000);
             // Start mic detection on load or button press
             startMicDetection();
          });
