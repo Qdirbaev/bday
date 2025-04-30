@@ -218,6 +218,7 @@ body {
 
 /* CAKE */
 .cake-container {
+   margin-top: 20px;
    opacity: 0;
    transition: opacity 3s ease;
 }

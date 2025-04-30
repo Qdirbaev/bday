@@ -208,7 +208,7 @@ switchButton.addEventListener("click", () => {
          const volume = Math.sqrt(sum / dataArray.length);
 
          //Trigger when volume exceeds threshold (tune this value)
-         if (volume > 15) {
+         if (volume > 30) {
             setTimeout(() => {
                const flame = document.querySelector(".flame");
                if (!flame.classList.contains("blow-out")) {
