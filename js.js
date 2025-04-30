@@ -62,6 +62,26 @@ function startConfetti() {
    })();
 }
 
+function fadeOutMusic(audioElement, fadeDuration = 1000) {
+   let fadeIntervalId = null;
+   const startVolume = audioElement.volume;
+   const fadeInterval = 50;
+   let currentTime = 0;
+
+   fadeIntervalId = setInterval(() => {
+      currentTime += fadeInterval;
+      const newVolume = startVolume * (1 - currentTime / fadeDuration);
+
+      if (newVolume <= 0) {
+         audioElement.volume = 0;
+         audioElement.pause();
+         clearInterval(fadeIntervalId);
+      } else {
+         audioElement.volume = Math.max(0, newVolume);
+      }
+   }, fadeInterval);
+}
+
 switchButton.addEventListener("click", () => {
    document.body.classList.remove("loop-animation"); // just in case
 
@@ -84,7 +104,7 @@ switchButton.addEventListener("click", () => {
          playMusicButton.addEventListener(
             "click",
             () => {
-               //music.play();
+               music.play();
                switchButton.disabled = true;
 
                playMusicButton.style.display = "none";
@@ -108,7 +128,7 @@ switchButton.addEventListener("click", () => {
             },
             { once: true }
          );
-      }, 3000);
+      }, 4000);
    }
    function stage_4() {
       setTimeout(() => {
@@ -143,12 +163,13 @@ switchButton.addEventListener("click", () => {
                      }, 7000);
                   }, 2000);
                   //blow text appears
-               }, 10000);
+               }, 7000);
             }, 2000);
          });
       }, 1000);
    }
    function stage_blowing() {
+      fadeOutMusic(music, 3000);
       const flame = document.querySelector(".flame");
       let audioContext, analyser, mic, dataArray;
 
@@ -198,6 +219,7 @@ switchButton.addEventListener("click", () => {
                      setTimeout(() => {
                         blowingCont.classList.remove("show");
                         setTimeout(() => {
+                           music.play();
                            const againBtn = document.querySelector(".again");
                            againBtn.classList.remove("hidden");
                         }, 2000);
