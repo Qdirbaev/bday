@@ -210,8 +210,7 @@ switchButton.addEventListener("click", () => {
          // Start mic detection on load or button press
       }
       startMicDetection();
-
-      bulbs.classList.remove("hidden");
-      switchButton.style.display = "none";
    }
+   bulbs.classList.remove("hidden");
+   switchButton.style.display = "none";
 });
