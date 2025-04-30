@@ -139,7 +139,7 @@ switchButton.addEventListener("click", () => {
             letGoBtn.style.display = "none";
             setTimeout(() => {
                stage_5();
-            }, 7000);
+            }, 4000);
          });
       }, 4000);
    }
@@ -222,6 +222,9 @@ switchButton.addEventListener("click", () => {
                            music.play();
                            const againBtn = document.querySelector(".again");
                            againBtn.classList.remove("hidden");
+                           againBtn.addEventListener("click", () => {
+                              window.location.reload();
+                           });
                         }, 2000);
                      }, 2000);
                   }, 1000);
