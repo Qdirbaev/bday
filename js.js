@@ -23,29 +23,6 @@ const cakeBtn = document.querySelector(".cake-btn");
 // stage close eyes
 const closeCont = document.querySelector(".close-eyes");
 
-// stage 7 blowing
-const blowingCont = document.querySelector(".blowing");
-
-// asking access to microphone
-let micAccessGranted = false;
-
-async function requestMicrophoneAccess() {
-   try {
-      await navigator.mediaDevices.getUserMedia({ audio: true });
-      micAccessGranted = true;
-      console.log("Microphone access granted.");
-   } catch (err) {
-      micAccessGranted = false;
-      console.error("Microphone access denied:", err);
-   }
-}
-
-// Ask for mic access as soon as the page is ready
-document.addEventListener("DOMContentLoaded", () => {
-   requestMicrophoneAccess();
-});
-
-
 
 switchButton.addEventListener("click", () => {
    document.body.classList.remove("loop-animation"); // just in case
